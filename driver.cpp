@@ -2,7 +2,7 @@
  *	@Author:	Jeff Berube
  *	@Title:		driver.cpp
  *
- *	@Description:	Test unit for memory class
+ *	@Description:	Test unit for memory class with overloaded operators 
  *
  */
 
@@ -12,31 +12,52 @@
 
 using namespace std;
 
+void test_equality(Memory& left_side, Memory& right_side) {
+
+	if (left_side == right_side) printf("A is equal to B.\n\n");
+	else printf("A is not equal to B.\n\n");
+
+}
+
 int main() {
 
-	Memory mem;
+	Memory A(100);
+	Memory B, C;
 
-	/* Randomly populate memory with ints */
-	for (int i = 0; i < 100; i++)
-		mem.store(i, rand() % 100 + 1);
+	/* Populate B with 5 for the first 50 values */
+	for (int i = 0; i < 50; i++)
+		B[i] = 5;
 
-	printf("\n\nMemory after being randomly populated.\n\n");
+	printf("\n*** Subscript Operator Test ***\n");
+	printf("Object B populated using subscript operator\n\n");
+	
+	B.dump();
 
-	mem.dump();
+	A = B;
 
-	mem.copy_block(0, 20, 83);
+	printf("\n*** Equality Operator Test #1 ***\n");
+	printf("Object B copied into A and then tested for equality.\n\n");
 
-	printf("Memory after block copy.\n\n");
+	test_equality(A, B);
 
-	mem.dump();
+	printf("\n*** Equality Operator Test #2 ***\n");
+	printf("Object A modified and then tested for equality against object B.\n\n");
 
-	printf("Partial memory dump using only start index\n\n");
+	A[3] = 4;
 
-	mem.dump(21);
+	test_equality(A, B);
 
-	printf("Partial memory dump using start index and length.\n\n");
+	printf("\n*** Addition Operator Test ***\n");
+	printf("Object C is equal to Object A plus Object B\n\n");
+	
+	C = A + B;
 
-	mem.dump(21, 20);
+	C.dump();
+
+	printf("\n*** Output Operator Test ***\n");
+	printf("Object C dumped using << operator\n\n");
+
+	cout << C;
 
 	return 0;
 

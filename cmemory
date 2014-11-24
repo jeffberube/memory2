@@ -9,6 +9,7 @@
 #ifndef __cmemory__
 #define __cmemory__
 
+#include <iostream>
 #include <cstdio>
 #include <vector>
 
@@ -21,14 +22,17 @@ class Memory {
 		int MAX_SIZE;
 
 	public:
-		Memory(int size = 100) { MAX_SIZE = size; data.resize(MAX_SIZE); }
+		explicit Memory(int size = 100) { MAX_SIZE = size; data.resize(MAX_SIZE); }
 		void store(int index, int value);
 		int retrieve(int index);
 		void copy_block(int source_index, int length, int destination_index);
 		void dump(int start, int length);
 		void dump(int start);
 		void dump();
-
+		int& operator[](int value);
+		friend bool operator==(Memory& left_side, Memory& right_side);
+		friend ostream& operator<<(ostream& os, Memory& mem);
+		friend Memory& operator+(Memory& left_side, Memory& right_side);
 };
 
 #endif

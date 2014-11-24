@@ -85,3 +85,49 @@ void Memory::dump() {
 	dump(0, MAX_SIZE);
 
 }
+
+int& Memory::operator[](int value) {
+
+	return data[value];
+
+}
+
+bool operator==(Memory& left_side, Memory& right_side) {
+
+	int i = 0;
+
+	while (i < left_side.MAX_SIZE) {
+	
+		if (left_side[i] != right_side[i]) return false;
+		i++;
+
+	}
+
+	return true;
+
+}
+
+ostream& operator<<(ostream& os, Memory& mem) {
+
+	mem.dump();
+
+	return os;
+}
+
+Memory& operator+(Memory& left_side, Memory& right_side) {
+
+	Memory* tmp = new Memory(left_side.MAX_SIZE);
+
+	int i = 0;
+
+	while (i < left_side.MAX_SIZE) {
+	
+		(*tmp)[i] = left_side[i] + right_side[i];
+		i++;
+
+	}
+
+	return *tmp;
+
+}
+

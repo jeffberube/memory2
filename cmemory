@@ -1,0 +1,36 @@
+/*
+ *	@Author:	Jeff Berube
+ *	@Title:		cmemory
+ *
+ *	@Description: Memory class header
+ *
+ */
+
+#ifndef __cmemory__
+#define __cmemory__
+
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+class Memory {
+
+	private:
+		vector<int> data;
+		int MAX_SIZE;
+
+	public:
+		Memory(int size = 100) { MAX_SIZE = size; data.resize(MAX_SIZE); }
+		void store(int index, int value);
+		int retrieve(int index);
+		void copy_block(int source_index, int length, int destination_index);
+		void dump(int start, int length);
+		void dump(int start);
+		void dump();
+
+};
+
+#endif
+
+
